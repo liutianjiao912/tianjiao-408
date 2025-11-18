@@ -1,6 +1,6 @@
 # 思维导图生成指南
 
-## 📊 思维导图功能说明
+## 📊 思维导图功能说明刘天娇
 
 项目使用 **markmap** 工具将 Markdown 格式的思维导图转换为可交互的 HTML 网页。
 
@@ -38,6 +38,7 @@ pnpm dev
 ## 📁 文件结构
 
 ### 源文件位置
+
 ```
 docs/mark-map/
 ├── ds-map.md          # 数据结构思维导图
@@ -48,6 +49,7 @@ docs/mark-map/
 ```
 
 ### 生成文件位置
+
 ```
 docs/.vuepress/public/mind-map/
 ├── ds-map.html        # 数据结构思维导图 HTML
@@ -82,7 +84,7 @@ root(数据结构)
 - 使用 `mindmap` 代码块类型
 - `root()` 定义根节点
 - `()` 定义子节点
-- 使用缩进表示层级关系（4个空格或1个Tab）
+- 使用缩进表示层级关系（4 个空格或 1 个 Tab）
 
 ### 示例
 
@@ -113,11 +115,13 @@ root(计算机408)
 生成过程分为三步：
 
 1. **清空目标目录**
+
    ```bash
    rm -rf docs/.vuepress/public/mind-map/*
    ```
 
 2. **转换 Markdown 为 HTML**
+
    ```bash
    npx markmap --no-open docs/mark-map/ds-map.md
    npx markmap --no-open docs/mark-map/os-map.md
@@ -136,6 +140,7 @@ root(计算机408)
 ### 在开发服务器中访问
 
 1. 启动开发服务器：
+
    ```bash
    pnpm dev
    ```
@@ -210,13 +215,14 @@ pnpm build:mark-map
 
 ```yaml
 ---
-levels: 3  # 默认显示3层，可以调整
+levels: 3 # 默认显示3层，可以调整
 ---
 ```
 
 ### 思维导图样式
 
 生成的 HTML 文件支持：
+
 - 缩放（鼠标滚轮）
 - 拖拽
 - 节点展开/折叠
@@ -229,6 +235,7 @@ levels: 3  # 默认显示3层，可以调整
 ### Q: 思维导图没有生成？
 
 A: 检查以下几点：
+
 1. 确保 Markdown 文件在 `docs/mark-map/` 目录下
 2. 确保文件扩展名是 `.md`
 3. 确保 `mindmap` 代码块格式正确
@@ -236,7 +243,8 @@ A: 检查以下几点：
 
 ### Q: 如何更新思维导图？
 
-A: 
+A:
+
 1. 修改 `docs/mark-map/*.md` 文件
 2. 运行 `pnpm build:mark-map` 重新生成
 3. 刷新浏览器页面
@@ -261,5 +269,3 @@ A: 可以调整 `levels` 参数，减少默认显示的层级。
 - 思维导图会在 `pnpm dev` 时自动生成，无需手动运行
 - 修改思维导图后，需要重新运行生成命令
 - 生成的 HTML 文件可以独立打开，不依赖开发服务器
-
-
