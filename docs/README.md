@@ -3,10 +3,6 @@ home: true
 title: 首页
 heroText: 计算机408全家桶
 tagline: 保持终身学习，读研or工作，做适合自己的选择!
-actions:
-  - text: 快速开始🔥
-    link: /quick-start.md
-    type: primary
 #  - text: 工作机会 💡
 #    link: /job-poster-bytedance.md
 #    type: secondary
@@ -32,6 +28,4 @@ features:
   - title: 反复、多次
     details: 好的学习方法便成功了一半，记忆是会遗忘的，面对408考试多、乱、杂的知识点，反复、多次学习尤为重要
 ---
-
-<!-- @include: ../README.md#quick-start -->
 
