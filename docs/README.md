@@ -2,10 +2,6 @@
 home: true
 title: 首页
 heroText: 计算机408全家桶
-tagline: 保持终身学习，读研or工作，做适合自己的选择!
-#  - text: 工作机会 💡
-#    link: /job-poster-bytedance.md
-#    type: secondary
 features:
   - title: 数据结构
     details: 链表、栈、队列是基础，树、图论是难点。查找、排序套路多，算法模型不容忽视。代码能力不必过度忧虑，伪代码未尝不可

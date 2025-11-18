@@ -32,7 +32,6 @@ const copyrightHtmlStr = `
 export default defineVipVuepressConfig({
   base: vipDocSite.getBase(pkg.name),
   title: '计算机408全家桶',
-  description: '磨刀不误砍柴工，读完硕士再打工',
   port: 4200,
   source: '',
   head: [
