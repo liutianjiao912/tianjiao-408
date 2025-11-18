@@ -1,0 +1,37 @@
+{
+  "name": "408CSFamily",
+  "type": "module",
+  "version": "0.0.1-alpha.19",
+  "packageManager": "pnpm@9.6.0",
+  "description": "研究生考试408考点、工作面试计算机基础知识合集",
+  "authorInfo": {
+    "name": "408CSFamily",
+    "email": "",
+    "url": "https://github.com/142vip",
+    "homePage": "https://408.142vip.cn"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.x",
+    "pnpm": "9.6.0"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm && chmod +x ./scripts/*",
+    "clean": "npx fa clean --ignore-tips --dist --vite --deps --all",
+    "lint": "npx fa lint",
+    "lint:fix": "npx fa lint --fix",
+    "dev": "pnpm build:mark-map && npx vuepress dev docs",
+    "build": "npx vuepress build docs --clean-temp --clean-cache",
+    "build:mark-map": "npx node --loader ts-node/esm --no-warnings scripts/core/mark-map.ts"
+  },
+  "devDependencies": {
+    "@142vip/eslint-config": "0.0.1-alpha.4",
+    "@142vip/fairy-cli": "0.0.3-alpha.25",
+    "@142vip/utils": "0.0.1-alpha.37",
+    "@142vip/vuepress": "0.0.1-alpha.17",
+    "markmap-cli": "0.18.11",
+    "only-allow": "1.2.1",
+    "ts-node": "10.9.2",
+    "xmind-embed-viewer": "1.2.0"
+  }
+}
