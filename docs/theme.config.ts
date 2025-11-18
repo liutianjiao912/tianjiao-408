@@ -15,19 +15,6 @@ export const navbarConfig = defineVipNavbarConfig([
   { text: '📘 计算机组成原理', link: '/ccp/' },
   { text: '📗 计算机网络', link: '/cn/' },
   { text: '🧠 思维导图', link: '/mark-map/ds-map.html' },
-  {
-    text: '👉 了解更多',
-    children: [
-      { text: '📄 变更记录', link: '/changelog.md' },
-      { text: '📣 网站动态', link: '/big-event-history.md' },
-      {
-        text: '外链',
-        children: [
-          { text: '🎯 开发计划', link: 'https://142vip-cn.feishu.cn/share/base/view/shrcnCSIIgL5Tg2PUpKWwiQnr6g' },
-        ],
-      },
-    ],
-  },
 ])
 
 /**
