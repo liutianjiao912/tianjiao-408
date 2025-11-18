@@ -58,7 +58,7 @@ export default defineVipVuepressConfig({
     navbarLayout: {
       start: ['Brand'],
       center: ['Links'],
-      end: ['Language', 'Outlook', 'Repo', 'Search'],
+      end: ['Language', 'Outlook', 'Search'],
     },
     logo: '/logo.png',
     logoDark: '/logo.png',
@@ -67,9 +67,6 @@ export default defineVipVuepressConfig({
     footer: footerHtmlStr,
     // 版权
     copyright: copyrightHtmlStr,
-    // 仓库
-    repo: `142vip/${pkg.name}`,
-
     // 作者信息
     author: {
       name: '408CSFamily',
