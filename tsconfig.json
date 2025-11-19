@@ -3,16 +3,9 @@
   "compilerOptions": {
     "target": "ES2020",
     "moduleDetection": "force",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "node",
-    "paths": {
-      "@theme/*": [
-        ".vitepress/theme/*"
-      ]
-    },
     "resolveJsonModule": true,
     "typeRoots": [
       "./typings",
