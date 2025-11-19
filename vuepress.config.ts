@@ -36,7 +36,7 @@ export default defineVipVuepressConfig({
     logoDark: '/images/logo.jpeg',
     hostname: 'localhost',
     footer: `<div>All Rights Reserved | <strong>${pkg.name}@v${pkg.version}</strong></div>`,
-    copyright: `<strong>MIT 协议</strong> | 版权所有 © 2015-${new Date().getFullYear()} 408CSFamily`,
+    copyright: `版权所有 © 2015-${new Date().getFullYear()} 408CSFamily`,
     author: { name: '408CSFamily' },
     docsDir: VUEPRESS_DEFAULT_DOCS_DIR,
     docsBranch: 'main',
