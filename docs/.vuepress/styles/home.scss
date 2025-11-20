@@ -1,0 +1,248 @@
+/* 首页样式 */
+
+/* 隐藏首页大标题 */
+.vp-hero-wrapper,
+.hero,
+.hero-info,
+.hero-title,
+.vp-hero-info-wrapper {
+  display: none !important;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+  padding: 50px 30px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.anime-card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  box-shadow: 0 20px 40px rgba(255, 154, 158, 0.25),
+              0 8px 16px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  height: 420px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.anime-card::before,
+.anime-card::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.anime-card::before {
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transform: scale(0.5);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+.anime-card::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 30%, transparent 70%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.anime-card:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.anime-card:hover::after {
+  opacity: 1;
+}
+
+.anime-card:hover {
+  transform: translateY(-15px) scale(1.05) rotateY(2deg);
+  box-shadow: 0 30px 60px rgba(255, 154, 158, 0.4),
+              0 15px 30px rgba(0, 0, 0, 0.2),
+              inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.anime-card:nth-child(1) { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fad0c4 100%); }
+.anime-card:nth-child(2) { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #ffd1ff 100%); }
+.anime-card:nth-child(3) { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffd89b 100%); }
+.anime-card:nth-child(4) { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%); }
+.anime-card:nth-child(5) { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #ffd1ff 100%); }
+.anime-card:nth-child(6) { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+.anime-card:nth-child(7) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%); }
+
+.anime-card:nth-child(1):hover,
+.anime-card:nth-child(4):hover {
+  box-shadow: 0 30px 60px rgba(255, 154, 158, 0.45), 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.anime-card:nth-child(2):hover,
+.anime-card:nth-child(5):hover {
+  box-shadow: 0 30px 60px rgba(168, 237, 234, 0.45), 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.anime-card:nth-child(3):hover {
+  box-shadow: 0 30px 60px rgba(252, 182, 159, 0.45), 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.anime-card:nth-child(6):hover {
+  box-shadow: 0 30px 60px rgba(102, 126, 234, 0.45), 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.anime-card:nth-child(7):hover {
+  box-shadow: 0 30px 60px rgba(240, 147, 251, 0.45), 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 25px;
+}
+
+.card-image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(0, 0, 0, 0.05) 100%);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 25px;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.8s ease;
+  filter: brightness(1.05) saturate(1.15) contrast(1.05);
+  border-radius: 25px;
+}
+
+.anime-card:hover .card-image {
+  transform: scale(1.2) rotate(2deg);
+  filter: brightness(1.15) saturate(1.3) contrast(1.1);
+}
+
+.card-sparkle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+  border-radius: 25px;
+}
+
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 30%,
+    rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 4s infinite;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 1),
+              0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(0) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-40px) translateX(15px) scale(2) rotate(180deg);
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) translateX(30px) scale(0) rotate(360deg);
+  }
+}
+
+.anime-card:hover .sparkle {
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+}
+
+.sparkle:nth-child(1) { left: 15%; animation-delay: 0s; }
+.sparkle:nth-child(2) { left: 35%; animation-delay: 0.3s; }
+.sparkle:nth-child(3) { left: 55%; animation-delay: 0.6s; }
+.sparkle:nth-child(4) { left: 75%; animation-delay: 0.9s; }
+.sparkle:nth-child(5) { left: 25%; animation-delay: 1.2s; }
+.sparkle:nth-child(6) { left: 65%; animation-delay: 1.5s; }
+
+@keyframes glow {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px 20px;
+  }
+
+  .anime-card {
+    height: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    padding: 20px 15px;
+  }
+
+  .anime-card {
+    height: 350px;
+    border-radius: 24px;
+  }
+
+  .card-image-wrapper {
+    border-radius: 21px;
+  }
+}
+

@@ -5,109 +5,153 @@
   注意：
     - 使用ClientOnly内置组件，只在客户端加载，避免依赖构建出错
 -->
-<script>
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue'
 import { XMindEmbedViewer } from 'xmind-embed-viewer'
 import mapData from '../public/mind-map/index.json'
 
-export default {
-  data() {
-    return {
-      viewer: {},
-      xmindIndex: 0,
-      xmindFileList: [],
-      xmindFile: mapData.length > 0 ? mapData[0].xMindPath : '../mark-map/操作系统发展历程.xmind',
+interface MapDataItem {
+  name: string
+  xMindPath: string
+}
+
+const viewer = ref<XMindEmbedViewer | null>(null)
+const xmindIndex = ref(0)
+const loading = ref(false)
+const error = ref<string | null>(null)
+
+const xmindFileList = ref(mapData.map(({ name }) => name))
+const xmindFile = ref(
+  (mapData as MapDataItem[]).length > 0
+    ? (mapData as MapDataItem[])[0].xMindPath
+    : '../mark-map/操作系统发展历程.xmind'
+)
+
+watch(xmindIndex, async (newIndex) => {
+  if (!viewer.value) return
+
+  loading.value = true
+  error.value = null
+
+  try {
+    const { xMindPath } = (mapData as MapDataItem[])[newIndex]
+    const xmindResponse = await fetch(xMindPath)
+
+    if (!xmindResponse.ok) {
+      throw new Error(
+        `Failed to fetch XMind file: ${xmindResponse.statusText}`
+      )
     }
-  },
 
-  /**
-   * 监听下来列表变更
-   */
-  watch: {
-    async xmindIndex(newIndex, _oldVal) {
-      const { xMindPath } = mapData[newIndex]
+    const data = await xmindResponse.arrayBuffer()
+    viewer.value.setZoomScale(100)
+    viewer.value.load(data)
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Unknown error'
+    console.error('Error loading XMind file:', err)
+  } finally {
+    loading.value = false
+  }
+})
 
-      // 打开指定
-      const xmindResponse = await fetch(xMindPath)
-      const data = await xmindResponse.arrayBuffer()
-      this.viewer.setZoomScale(100)
-      this.viewer.load(data)
-    },
-  },
-  created() {
-    this.xmindFileList = mapData.map(({ name }) => name)
-  },
-  mounted() {
-    (async () => {
-      const res = await fetch(this.xmindFile)
+onMounted(async () => {
+  loading.value = true
+  error.value = null
 
-      this.viewer = new XMindEmbedViewer({
-        el: '#x-mind-manager-container',
-        file: await res.arrayBuffer(),
-        // 国内：cn 全球：global
-        region: 'cn',
-        styles: {
-          width: '100%',
-          minHeight: '600px',
-          height: 'auto',
-          maxHeight: '1200px',
-        },
-      })
-    })()
-  },
+  try {
+    const res = await fetch(xmindFile.value)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch initial XMind file: ${res.statusText}`)
+    }
 
-  methods: {
-    /**
-     * 打开本地思维导图文件
-     */
-    async handleOpenLocalBtnClick() {
-      const fileSelector = document.createElement('input')
-      fileSelector.style.display = 'none'
-      document.body.appendChild(fileSelector)
-      await new Promise((resolve) => {
-        fileSelector.setAttribute('type', 'file')
-        fileSelector.setAttribute('accept', '.xmind')
-        fileSelector.addEventListener('change', () => {
+    viewer.value = new XMindEmbedViewer({
+      el: '#x-mind-manager-container',
+      file: await res.arrayBuffer(),
+      // 国内：cn 全球：global
+      region: 'cn',
+      styles: {
+        width: '100%',
+        minHeight: '600px',
+        height: 'auto',
+        maxHeight: '1200px',
+      },
+    })
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Unknown error'
+    console.error('Error initializing XMind viewer:', err)
+  } finally {
+    loading.value = false
+  }
+})
+
+async function handleOpenLocalBtnClick() {
+  const fileSelector = document.createElement('input')
+  fileSelector.style.display = 'none'
+  fileSelector.setAttribute('type', 'file')
+  fileSelector.setAttribute('accept', '.xmind')
+
+  document.body.appendChild(fileSelector)
+
+  try {
+    await new Promise<void>((resolve, reject) => {
+      fileSelector.addEventListener('change', () => {
+        if (fileSelector.files && fileSelector.files.length > 0) {
           resolve()
-        })
-        fileSelector.click()
-      }).finally(() => {
-        document.body.removeChild(fileSelector)
+        } else {
+          reject(new Error('No file selected'))
+        }
       })
-      if (!fileSelector.files || !fileSelector.files.length) {
-        return
-      }
-      const file = fileSelector.files[0]
-      if (!file)
-        return
+      fileSelector.addEventListener('cancel', () => {
+        reject(new Error('File selection cancelled'))
+      })
+      fileSelector.click()
+    })
 
-      const data = await file.arrayBuffer()
-      this.viewer.load(data)
-    },
-    /**
-     * 恢复缩放比例
-     */
-    async handleZoomScaleRevertBtnClick() {
-      this.viewer.setFitMap()
-    },
-  },
+    const file = fileSelector.files?.[0]
+    if (!file || !viewer.value) return
+
+    const data = await file.arrayBuffer()
+    viewer.value.load(data)
+  } catch (err) {
+    console.error('Error opening local file:', err)
+  } finally {
+    document.body.removeChild(fileSelector)
+  }
+}
+
+function handleZoomScaleRevertBtnClick() {
+  viewer.value?.setFitMap()
 }
 </script>
 
 <template>
   <div class="x-mind-container">
-    <!-- xmind思维导图管理器 -->
+    <div v-if="loading" class="loading">加载中...</div>
+    <div v-if="error" class="error">错误: {{ error }}</div>
     <div id="x-mind-manager-container" />
     <div class="btn-container">
-      <button id="openLocalBtn" @click="handleOpenLocalBtnClick">
+      <button
+        id="openLocalBtn"
+        @click="handleOpenLocalBtnClick"
+        :disabled="loading"
+      >
         打开本地
       </button>
-      <button id="zoomScaleBtn" @click="handleZoomScaleRevertBtnClick">
+      <button
+        id="zoomScaleBtn"
+        @click="handleZoomScaleRevertBtnClick"
+        :disabled="!viewer || loading"
+      >
         还原缩放
       </button>
 
       <div class="select">
-        <select v-model="xmindIndex">
-          <option v-for="(xmind, index) in xmindFileList" :key="index" :value="index">
+        <select v-model="xmindIndex" :disabled="loading">
+          <option
+            v-for="(xmind, index) in xmindFileList"
+            :key="index"
+            :value="index"
+          >
             {{ xmind }}
           </option>
         </select>
@@ -163,6 +207,7 @@ export default {
   background: transparent none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
 }
 
 .select select:focus {
@@ -176,31 +221,46 @@ export default {
 
 button {
   background: #eb94d0;
-  /* 创建渐变 */
-  background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
-  background-image: -moz-linear-gradient(top, #eb94d0, #2079b0);
-  background-image: -ms-linear-gradient(top, #eb94d0, #2079b0);
-  background-image: -o-linear-gradient(top, #eb94d0, #2079b0);
   background-image: linear-gradient(to bottom, #eb94d0, #2079b0);
-  /* 给按钮添加圆角 */
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
   border-radius: 10px;
-  -moz-box-shadow: 6px 5px 24px #666666;
+  box-shadow: 6px 5px 24px #666666;
   font-family: Arial, serif;
   margin: 5px;
   color: #fafafa;
   font-size: 14px;
   padding: 5px;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* 悬停样式 */
-button:hover {
-  cursor: pointer;
+button:hover:not(:disabled) {
   background: #2079b0;
-  background-image: -webkit-linear-gradient(top, #2079b0, #eb94d0);
-  background-image: -ms-linear-gradient(top, #2079b0, #eb94d0);
+  background-image: linear-gradient(to bottom, #2079b0, #eb94d0);
   text-decoration: none;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.loading {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.error {
+  background-color: #ffe0e0;
+  color: #cc0000;
 }
 </style>

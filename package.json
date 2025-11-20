@@ -19,8 +19,9 @@
     "clean": "npx fa clean --ignore-tips --dist --vite --deps --all",
     "lint": "npx fa lint",
     "lint:fix": "npx fa lint --fix",
-    "dev": "pnpm build:mark-map && npx vuepress dev docs",
-    "build": "npx vuepress build docs --clean-temp --clean-cache",
+    "dev": "npx vuepress dev docs",
+    "dev:with-map": "pnpm build:mark-map && pnpm dev",
+    "build": "pnpm build:mark-map && npx vuepress build docs --clean-temp --clean-cache",
     "build:mark-map": "npx node --loader ts-node/esm --no-warnings scripts/core/mark-map.ts"
   },
   "devDependencies": {

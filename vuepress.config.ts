@@ -15,6 +15,9 @@ export default defineVipVuepressConfig({
   head: [['link', { rel: 'icon', href: 'favicon.ico' }]],
   markdown: {
     headers: { level: [2, 3, 4] },
+    math: {
+      type: 'katex',
+    },
   },
   theme: getVipHopeTheme({
     navbar: navbarConfig,
@@ -25,9 +28,13 @@ export default defineVipVuepressConfig({
       end: ['Language', 'Outlook', 'Search'],
     },
     logo: '/images/logo.jpeg',
-    logoDark: '/images/logo.jpeg',
     docsDir: VUEPRESS_DEFAULT_DOCS_DIR,
+    breadcrumb: false,
     plugins: {
+      readingTime: false,
+      mdEnhance: {
+        math: true,
+      },
       search: {
         maxSuggestions: 10,
         locales: {
