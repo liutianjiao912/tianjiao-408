@@ -1,7 +1,7 @@
 /**
  * 高等数学
  */
-export const mathSidebar = [
+export const advancedMathematicsSidebar = [
   {
     text: '常用公式',
     prefix: '常用公式',

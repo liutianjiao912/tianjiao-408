@@ -4,7 +4,7 @@ import { cnSidebar } from './cn/cn.sidebar'
 import { dsSidebar } from './ds/ds.sidebar'
 import { linearAlgebraSidebar } from './linear-algebra/linear-algebra.sidebar'
 import { MarkMapSidebar } from './mark-map/mark-map.sidebar'
-import { mathSidebar } from './math/math.sidebar'
+import { advancedMathematicsSidebar } from './advanced-mathematics/advanced-mathematics.sidebar'
 import { osSidebar } from './os/os.sidebar'
 
 export const navbarConfig = defineVipNavbarConfig([])
@@ -14,7 +14,7 @@ export const sidebarConfig = defineVipSidebarConfig({
   '/os': osSidebar,
   '/ccp': cppSidebar,
   '/cn': cnSidebar,
-  '/math': mathSidebar,
+  '/advanced-mathematics': advancedMathematicsSidebar,
   '/linear-algebra': linearAlgebraSidebar,
   '/mark-map': MarkMapSidebar,
 })

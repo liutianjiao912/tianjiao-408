@@ -20,7 +20,7 @@ title: 首页
     <div class="card-sparkle"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></div>
     <div class="card-image-wrapper"><img src="/images/计算机网络.jpeg" alt="计算机网络" class="card-image"></div>
   </a>
-  <a href="/math/" class="anime-card">
+  <a href="/advanced-mathematics/" class="anime-card">
     <div class="card-sparkle"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></div>
     <div class="card-image-wrapper"><img src="/images/高等数学.jpeg" alt="高等数学" class="card-image"></div>
   </a>
