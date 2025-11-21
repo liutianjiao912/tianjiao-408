@@ -30,7 +30,13 @@ export default defineVipVuepressConfig({
     logo: '/images/logo.jpeg',
     docsDir: VUEPRESS_DEFAULT_DOCS_DIR,
     breadcrumb: false,
+    lastUpdated: false,
+    contributors: false,
+    prev: false,
+    next: false,
+    pageInfo: false,
     plugins: {
+      git: false,
       readingTime: false,
       mdEnhance: {
         math: true,
