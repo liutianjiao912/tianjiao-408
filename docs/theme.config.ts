@@ -6,6 +6,7 @@ import { linearAlgebraSidebar } from './linear-algebra/linear-algebra.sidebar'
 import { MarkMapSidebar } from './mark-map/mark-map.sidebar'
 import { advancedMathematicsSidebar } from './advanced-mathematics/advanced-mathematics.sidebar'
 import { osSidebar } from './os/os.sidebar'
+import { mathProblemsSidebar } from './math-problems/math-problems.sidebar'
 
 export const navbarConfig = defineVipNavbarConfig([])
 
@@ -17,4 +18,5 @@ export const sidebarConfig = defineVipSidebarConfig({
   '/advanced-mathematics': advancedMathematicsSidebar,
   '/linear-algebra': linearAlgebraSidebar,
   '/mark-map': MarkMapSidebar,
+  '/math-problems': mathProblemsSidebar,
 })

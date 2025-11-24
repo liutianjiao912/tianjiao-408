@@ -28,6 +28,10 @@ title: 首页
     <div class="card-sparkle"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></div>
     <div class="card-image-wrapper"><img src="/images/线性代数.jpeg" alt="线性代数" class="card-image"></div>
   </a>
+  <a href="/math-problems/" class="anime-card">
+    <div class="card-sparkle"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></div>
+    <div class="card-image-wrapper"><img src="/images/数学二真题.jpeg" alt="数学二真题" class="card-image"></div>
+  </a>
   <a href="/mark-map/ds-map.html" class="anime-card">
     <div class="card-sparkle"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></div>
     <div class="card-image-wrapper"><img src="/images/思维导图.jpeg" alt="思维导图" class="card-image"></div>
