@@ -3,14 +3,15 @@
  */
 export const advancedMathematicsSidebar = [
   {
-    text: '常用公式',
-    prefix: '常用公式',
+    text: '知识点',
+    prefix: '知识点',
     collapsible: true,
     children: [
       { text: '极限与连续', link: '极限与连续.md' },
       { text: '导数与微分', link: '导数与微分.md' },
       { text: '泰勒展开式与麦克劳林公式', link: '泰勒展开式与麦克劳林公式.md' },
       { text: '洛必达法则', link: '洛必达法则.md' },
+      { text: '分段函数', link: '分段函数.md' },
     ],
   },
   {
