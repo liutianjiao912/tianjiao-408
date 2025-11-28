@@ -8,9 +8,22 @@ const QUESTION_COUNT = 23
 
 const questionChildren = Array.from({ length: QUESTION_COUNT }, (_, idx) => {
   const order = idx + 1
+  let link: string
+  if (order <= 10) {
+    // 选择题 1-10
+    link = `${order}选择题.md`
+  }
+  else if (order <= 16) {
+    // 填空题 11-16
+    link = `${order}填空题.md`
+  }
+  else {
+    // 解答题 17-23
+    link = `${order}解答题.md`
+  }
   return {
-    text: `第${order}题`,
-    link: `${order}.md`,
+    text: link.replace('.md', ''),
+    link,
   }
 })
 
