@@ -12,6 +12,7 @@ export const advancedMathematicsSidebar = [
       { text: '泰勒展开式与麦克劳林公式', link: '泰勒展开式与麦克劳林公式.md' },
       { text: '洛必达法则', link: '洛必达法则.md' },
       { text: '分段函数', link: '分段函数.md' },
+      { text: '函数图像', link: '函数图像.md' },
     ],
   },
   {
