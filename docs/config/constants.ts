@@ -42,3 +42,21 @@ export const XMIND_CONFIG = {
   },
 } as const
 
+/**
+ * 数学真题配置
+ */
+export const MATH_PROBLEMS_CONFIG = {
+  /** 起始年份 */
+  startYear: 2025,
+  /** 结束年份 */
+  endYear: 2015,
+  /** 题目总数 */
+  questionCount: 23,
+  /** 选择题范围 */
+  choiceRange: { start: 1, end: 10 },
+  /** 填空题范围 */
+  fillRange: { start: 11, end: 16 },
+  /** 解答题范围 */
+  answerRange: { start: 17, end: 23 },
+} as const
+
