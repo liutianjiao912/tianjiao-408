@@ -596,4 +596,38 @@ export const advancedMathematicsSidebar = [
       },
     ],
   },
+  {
+    text: '补弱',
+    prefix: '补弱',
+    collapsible: true,
+    children: [
+      {
+        text: '专题一：高中知识在考研数学中的应用',
+        link: '专题一：高中知识在考研数学中的应用.md',
+      },
+      {
+        text: '专题二：简易逻辑与极限的四则运算及等价无穷小替换',
+        link: '专题二：简易逻辑与极限的四则运算及等价无穷小替换.md',
+      },
+    ],
+  },
+  {
+    text: '经典题目',
+    prefix: '经典题目',
+    collapsible: true,
+    children: [
+      {
+        text: '01',
+        link: '01.md',
+      },
+      {
+        text: '01洛必达法则',
+        link: '01洛必达法则.md',
+      },
+      {
+        text: '02',
+        link: '02.md',
+      }
+    ],
+  }
 ]
