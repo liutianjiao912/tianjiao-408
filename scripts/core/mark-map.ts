@@ -4,7 +4,7 @@ import { join, extname } from 'path'
 
 const __dirname = VipNodeJS.getProcessCwd()
 
-const markMapSourcePath = VipNodeJS.pathJoin(__dirname, 'docs/mark-map')
+const markMapSourcePath = VipNodeJS.pathJoin(__dirname, 'docs/思维导图')
 const markMapTargetPath = VipNodeJS.pathJoin(__dirname, 'docs/.vuepress/public/mind-map')
 
 /**

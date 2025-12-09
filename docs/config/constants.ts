@@ -18,7 +18,7 @@ export const SIDEBAR_CONFIG = {
  */
 export const MARK_MAP_CONFIG = {
   /** 源文件路径 */
-  sourcePath: 'docs/mark-map',
+  sourcePath: '',
   /** 目标文件路径 */
   targetPath: 'docs/.vuepress/public/mind-map',
   /** 文件扩展名 */
@@ -32,7 +32,7 @@ export const XMIND_CONFIG = {
   /** 默认区域设置 */
   defaultRegion: 'cn' as 'cn' | 'global',
   /** 默认文件路径 */
-  defaultFilePath: '../mark-map/操作系统发展历程.xmind',
+  defaultFilePath: '',
   /** 容器样式 */
   containerStyles: {
     width: '100%',
@@ -58,5 +58,28 @@ export const MATH_PROBLEMS_CONFIG = {
   fillRange: { start: 11, end: 16 },
   /** 解答题范围 */
   answerRange: { start: 17, end: 23 },
+} as const
+
+/**
+ * 英语二真题配置
+ */
+export const ENGLISH_PROBLEMS_CONFIG = {
+  /** 起始年份 */
+  startYear: 2025,
+  /** 结束年份 */
+  endYear: 2010,
+  /** Section I: Use of English (完形填空) 题目数量 */
+  useOfEnglishCount: 20,
+  /** Section II: Reading Comprehension Part A 每个Text的题目数量 */
+  readingPartATextCount: 4,
+  readingPartAQuestionPerText: 5,
+  /** Section II: Reading Comprehension Part B 题目数量 */
+  readingPartBCount: 5,
+  /** Section III: Translation 题目数量 */
+  translationCount: 1,
+  /** Section IV: Writing Part A 题目数量 */
+  writingPartACount: 1,
+  /** Section IV: Writing Part B 题目数量 */
+  writingPartBCount: 1,
 } as const
 

@@ -6,121 +6,121 @@
     - 使用ClientOnly内置组件，只在客户端加载，避免依赖构建出错
 -->
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
-import { XMindEmbedViewer } from 'xmind-embed-viewer'
-import mapData from '../public/mind-map/index.json'
+import { ref, watch, onMounted } from "vue";
+import { XMindEmbedViewer } from "xmind-embed-viewer";
+import mapData from "../public/mind-map/index.json";
 
 interface MapDataItem {
-  name: string
-  xMindPath: string
+  name: string;
+  xMindPath: string;
 }
 
-const viewer = ref<XMindEmbedViewer | null>(null)
-const xmindIndex = ref(0)
-const loading = ref(false)
-const error = ref<string | null>(null)
+const viewer = ref<XMindEmbedViewer | null>(null);
+const xmindIndex = ref(0);
+const loading = ref(false);
+const error = ref<string | null>(null);
 
-const xmindFileList = ref(mapData.map(({ name }) => name))
+const xmindFileList = ref(mapData.map(({ name }) => name));
 const xmindFile = ref(
   (mapData as MapDataItem[]).length > 0
     ? (mapData as MapDataItem[])[0].xMindPath
-    : '../mark-map/操作系统发展历程.xmind'
-)
+    : ""
+);
 
 watch(xmindIndex, async (newIndex) => {
-  if (!viewer.value) return
+  if (!viewer.value) return;
 
-  loading.value = true
-  error.value = null
+  loading.value = true;
+  error.value = null;
 
   try {
-    const { xMindPath } = (mapData as MapDataItem[])[newIndex]
-    const xmindResponse = await fetch(xMindPath)
+    const { xMindPath } = (mapData as MapDataItem[])[newIndex];
+    const xmindResponse = await fetch(xMindPath);
 
     if (!xmindResponse.ok) {
       throw new Error(
         `Failed to fetch XMind file: ${xmindResponse.statusText}`
-      )
+      );
     }
 
-    const data = await xmindResponse.arrayBuffer()
-    viewer.value.setZoomScale(100)
-    viewer.value.load(data)
+    const data = await xmindResponse.arrayBuffer();
+    viewer.value.setZoomScale(100);
+    viewer.value.load(data);
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Unknown error'
-    console.error('Error loading XMind file:', err)
+    error.value = err instanceof Error ? err.message : "Unknown error";
+    console.error("Error loading XMind file:", err);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-})
+});
 
 onMounted(async () => {
-  loading.value = true
-  error.value = null
+  loading.value = true;
+  error.value = null;
 
   try {
-    const res = await fetch(xmindFile.value)
+    const res = await fetch(xmindFile.value);
     if (!res.ok) {
-      throw new Error(`Failed to fetch initial XMind file: ${res.statusText}`)
+      throw new Error(`Failed to fetch initial XMind file: ${res.statusText}`);
     }
 
     viewer.value = new XMindEmbedViewer({
-      el: '#x-mind-manager-container',
+      el: "#x-mind-manager-container",
       file: await res.arrayBuffer(),
       // 国内：cn 全球：global
-      region: 'cn',
+      region: "cn",
       styles: {
-        width: '100%',
-        minHeight: '600px',
-        height: 'auto',
-        maxHeight: '1200px',
+        width: "100%",
+        minHeight: "600px",
+        height: "auto",
+        maxHeight: "1200px",
       },
-    })
+    });
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Unknown error'
-    console.error('Error initializing XMind viewer:', err)
+    error.value = err instanceof Error ? err.message : "Unknown error";
+    console.error("Error initializing XMind viewer:", err);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-})
+});
 
 async function handleOpenLocalBtnClick() {
-  const fileSelector = document.createElement('input')
-  fileSelector.style.display = 'none'
-  fileSelector.setAttribute('type', 'file')
-  fileSelector.setAttribute('accept', '.xmind')
+  const fileSelector = document.createElement("input");
+  fileSelector.style.display = "none";
+  fileSelector.setAttribute("type", "file");
+  fileSelector.setAttribute("accept", ".xmind");
 
-  document.body.appendChild(fileSelector)
+  document.body.appendChild(fileSelector);
 
   try {
     await new Promise<void>((resolve, reject) => {
-      fileSelector.addEventListener('change', () => {
+      fileSelector.addEventListener("change", () => {
         if (fileSelector.files && fileSelector.files.length > 0) {
-          resolve()
+          resolve();
         } else {
-          reject(new Error('No file selected'))
+          reject(new Error("No file selected"));
         }
-      })
-      fileSelector.addEventListener('cancel', () => {
-        reject(new Error('File selection cancelled'))
-      })
-      fileSelector.click()
-    })
+      });
+      fileSelector.addEventListener("cancel", () => {
+        reject(new Error("File selection cancelled"));
+      });
+      fileSelector.click();
+    });
 
-    const file = fileSelector.files?.[0]
-    if (!file || !viewer.value) return
+    const file = fileSelector.files?.[0];
+    if (!file || !viewer.value) return;
 
-    const data = await file.arrayBuffer()
-    viewer.value.load(data)
+    const data = await file.arrayBuffer();
+    viewer.value.load(data);
   } catch (err) {
-    console.error('Error opening local file:', err)
+    console.error("Error opening local file:", err);
   } finally {
-    document.body.removeChild(fileSelector)
+    document.body.removeChild(fileSelector);
   }
 }
 
 function handleZoomScaleRevertBtnClick() {
-  viewer.value?.setFitMap()
+  viewer.value?.setFitMap();
 }
 </script>
 
@@ -187,7 +187,7 @@ function handleZoomScaleRevertBtnClick() {
 }
 
 .select:before {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 0;
